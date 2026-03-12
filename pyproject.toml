@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "de-challenge"
+version = "0.1.0"
+description = "FastAPI + PostgreSQL/PostGIS solution for trip ingestion and analytics."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "alembic>=1.14.1",
+  "asyncpg>=0.30.0",
+  "fastapi>=0.115.8",
+  "httpx>=0.28.1",
+  "pydantic-settings>=2.7.1",
+  "python-multipart>=0.0.20",
+  "sqlalchemy>=2.0.37",
+  "psycopg[binary]>=3.2.5",
+  "uvicorn[standard]>=0.34.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.4",
+  "testcontainers[postgres]>=4.9.1",
+]
+spark = [
+  "pyspark>=3.5.5",
+]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["app/tests"]
+addopts = "-q"
+
+[tool.alembic]
+script_location = "alembic"
